@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Naiv — Pioneer assistant for navigation in transit complexes</title>
+  <title>Naiv — Transit DT with the Public</title>
   <meta name="description" content="Naiv is a pioneer assistant for navigation through transit complexes, guiding riders with context-aware wayfinding." />
   <meta name="theme-color" content="#0ea5e9" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -168,6 +168,16 @@
       border-radius:14px; border:1px solid rgba(255,255,255,.08);
     }
 
+    @media (max-width: 900px){
+      .demo-strip{
+        grid-template-columns: 1fr;   /* stack vertically */
+        justify-items: stretch;       /* each image fills width */
+      }
+      /* Optional: let images keep natural aspect ratio on mobile */
+      .demo-strip img{ height: auto; }  /* remove the fixed 180px */
+    }
+
+
     /* ---------- Reveal on scroll ---------- */
     .reveal{ opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease; }
     .reveal.in{ opacity:1; transform:none; }
@@ -220,7 +230,7 @@
   <!-- Hero -->
   <main id="top" class="hero">
     <div class="container" style="padding-top:6rem;">
-      <h1 class="headline">Smarter Transit with Shared Insights On the Go</h1>
+      <h1 class="headline">Smart Transit with Shared Insights On the Go</h1>
       <p class="sub">Every snapshot shapes a smarter journey — Co-curate with AI and gain the collective mobility wisdom.</p>
     </div>
     <div class="spacer" aria-hidden="true"></div>
