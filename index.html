@@ -37,14 +37,14 @@
     /* ---------- Header & menu ---------- */
     header{
       position:fixed; inset:0 0 auto 0; z-index:50;
-      backdrop-filter: blur(8px);
-      background:rgba(248,248,248,.35);
-      border-bottom:1px solid rgba(255,255,255,.06);
+      backdrop-filter: blur(4px);
+      background:rgba(248, 248, 248, 0);
+      border-bottom:1px solid rgba(255, 255, 255, 0);
     }
     .nav{ display:flex; position: relative; align-items:center; justify-content:space-between; padding:.9rem 0; }
     .brand{ display:flex; align-items:center; gap:.6rem; font-weight:500; letter-spacing:.35px; }
     .brand span{ font-size:1.45rem; }
-    .brand .name{ color:#dbeafe; }
+    .brand .name{ padding:.35rem .45rem; color:#565656; }
     .brand .name .ai{ color:var(--brand); }  /* “a” and “i” in blue */
 
     .hamburger{
@@ -96,7 +96,7 @@
     .hero-bg::after{
       content:""; position:absolute; inset:0;
       background-image: var(--hero-img);
-      background-size:cover; background-position:center; opacity:.22;
+      background-size:cover; background-position:center; opacity:1;
     }
     .headline{
       font-size:clamp(2rem, 5vw, 3.5rem);
@@ -221,7 +221,7 @@
   <main id="top" class="hero">
     <div class="container" style="padding-top:6rem;">
       <h1 class="headline">Pioneer assistant for navigation through transit complex</h1>
-      <p class="sub">Context-aware, AI-guided wayfinding that helps riders move confidently across multi-level stations and interchanges.</p>
+      <p class="sub">Context-aware, AI-guided wayfinding that helps riders move confidently across transit complex and interchanges.</p>
     </div>
     <div class="spacer" aria-hidden="true"></div>
   </main>
@@ -232,7 +232,7 @@
       <div class="card-grid">
         <article class="cap-card reveal">
           <h3>Wayfinding</h3>
-          <p>Context-aware directions across multi-level stations: entrances, platforms, transfers, exits.</p>
+          <p>Context-aware directions across transit complex: entrances, platforms, transfers, exits.</p>
         </article>
         <article class="cap-card reveal">
           <h3>Taskplanning</h3>
@@ -264,7 +264,7 @@
 
         <aside class="demo-notes reveal">
           <h2>See Naiv in action</h2>
-          <p class="muted">Wayfinding, task planning, and live nowcasting inside multi-level stations.</p>
+          <p class="muted">Wayfinding, task planning, and live nowcasting inside transit complex.</p>
           <ul class="list">
             <li>Context-aware directions across levels</li>
             <li>Multi-step tasks (buy → meet → transfer)</li>
@@ -275,9 +275,9 @@
       </div>
 
       <div class="demo-strip reveal" aria-label="App screenshots">
-        <img src="assets/shot1.jpg" alt="Route suggestion screen"/>
-        <img src="assets/shot2.jpg" alt="Transfer guidance view"/>
-        <img src="assets/shot3.jpg" alt="Crowd nowcast overlay"/>
+        <img src="assets/image.jpg" alt="Route suggestion screen"/>
+        <img src="assets/image1.jpg" alt="Transfer guidance view"/>
+        <img src="assets/image2.jpg" alt="Crowd nowcast overlay"/>
       </div>
     </div>
   </section>
@@ -287,33 +287,36 @@
   </footer>
 
   <script>
-    addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
-    // Header menu
-    const menuBtn = document.getElementById('menuBtn');
-    const menu = document.getElementById('siteMenu');
+   // Header menu
+  const menuBtn = document.getElementById('menuBtn');
+  const menu = document.getElementById('siteMenu');
 
-    function openMenu(){ menu.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); }
-    function closeMenu(){ menu.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }
+  function openMenu(){ menu.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); }
+  function closeMenu(){ menu.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }
 
-    menuBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menu.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', menu.classList.contains('open'));
-    });
+  // Toggle on icon
+  menuBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', menu.classList.contains('open'));
+  });
 
-    // close when clicking outside
-    document.addEventListener('click', (e) => {
-      if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== menuBtn) {
-        closeMenu();
-      }
-    });
+  // Close when clicking/tapping outside
+  document.addEventListener('pointerdown', (e) => {
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
+      closeMenu();
+    }
+  }, { passive: true });
 
-    // close on Esc
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
+  // Close on Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
 
-    // close when a link is picked
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  // Close when a link is picked
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+
 
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
